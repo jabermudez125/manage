@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# este es el primer modelo en odoo
 
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
