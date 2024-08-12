@@ -1,0 +1,92 @@
+<odoo>
+  <data>
+    <!-- definición de vista de lista explícita -->
+
+    <record model="ir.ui.view" id="manage.task_list">
+      <field name="name">manage task list</field>
+      <field name="model">manage.task</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="manage.task_form">
+      <field name="name">manage task form</field>
+      <field name="model">manage.task</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="code"/>
+            <field name="name"/>
+            <field name="description"/>
+            <field name="creation_date"/>
+            <field name="start_date"/>
+            <field name="end_date"/>
+            <field name="is_paused"/>
+            <field name="sprint_id"/>
+            <field name="technologies_ids"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="manage.sprint_form">
+      <field name="name">manage sprint form</field>
+      <field name="model">manage.sprint</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+            <field name="description"/>
+            <field name="duration"/>
+            <field name="start_date"/>
+            <field name="end_date"/>
+            <field name="task_ids"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- acciones que abren vistas sobre modelos -->
+
+    <record model="ir.actions.act_window" id="manage.action_task_window">
+      <field name="name">manage task window</field>
+      <field name="res_model">manage.task</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="manage.action_sprint_window">
+      <field name="name">manage sprint window</field>
+      <field name="res_model">manage.sprint</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="manage.action_technology_window">
+      <field name="name">manage technology window</field>
+      <field name="res_model">manage.technology</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Elemento del menú superior -->
+
+    <menuitem name="manage" id="manage.menu_root"/>
+
+    <!-- categorías de menú -->
+
+    <menuitem name="Management" id="manage.menu_1" parent="manage.menu_root"/>
+
+    <!-- comportamiento -->
+
+    <menuitem name="Task" id="manage.menu_1_task_list" parent="manage.menu_1"
+              action="manage.action_task_window"/>
+
+    <menuitem name="Sprint" id="manage.menu_1_sprint_list" parent="manage.menu_1"
+              action="manage.action_sprint_window"/>  
+
+    <menuitem name="Technologies" id="manage.menu_1_technology_list" parent="manage.menu_1"
+              action="manage.action_technology_window"/>        
+
+  </data>
+</odoo>
