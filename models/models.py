@@ -23,6 +23,7 @@ class ManageHistory(models.Model):
     name = fields.Char()
     description = fields.Text()
     proyect_id = fields.Many2one('manage.proyect', ondelete='set null', string='Proyect')
+    task_ids = fields.One2many(string='tareas', comodel_name='manage.task', inverse_name='history_id')
 
 
 class ManageTask(models.Model):
@@ -32,8 +33,8 @@ class ManageTask(models.Model):
     code = fields.Char(compute="_get_code", string="Code")
 
     name = fields.Char(string="Nombre", readonly=False, required=True, help="Introduzca el nombre")
+    history_id = fields.Many2one('manage.history', ondelete='set null', help='historia relacionada')
     description = fields.Text()
-    creation_date = fields.Date()
     start_date = fields.Datetime()
     end_date = fields.Datetime()
     is_paused = fields.Boolean()
@@ -60,6 +61,7 @@ class ManageSprint(models.Model):
     _name = 'manage.sprint'
     _description = 'Manage Sprint'
 
+    proyect_ids = fields.Many2one('manage.proyect')
     name = fields.Char()
     description = fields.Text()
     duration = fields.Integer()
@@ -87,4 +89,4 @@ class ManageTechnology(models.Model):
                                 relation="technologies_tasks",
                                 column1="technology_id",
                                 column2="task_id",
-                                string="Tasks")    
+                                string="Tasks")
