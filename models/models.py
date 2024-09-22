@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 from odoo import _
 import datetime
 
-
+#--project--
 class ManageProyect(models.Model):
     _name = 'manage.proyect'
     _description = 'Manage Proyect' 
@@ -16,6 +16,7 @@ class ManageProyect(models.Model):
     history_ids = fields.One2many(comodel_name='manage.history', inverse_name='proyect_id', string='History')
 
 
+#--history--
 class ManageHistory(models.Model):
     _name = 'manage.history'
     _description = 'Manage History' 
@@ -24,8 +25,23 @@ class ManageHistory(models.Model):
     description = fields.Text()
     proyect_id = fields.Many2one('manage.proyect', ondelete='set null', string='Proyect')
     task_ids = fields.One2many(string='tareas', comodel_name='manage.task', inverse_name='history_id')
+    used_technologies = fields.Many2many("manage.technology", compute="_get_used_technologies")
+
+    #recorrer la tareas que están asociadad a esta historia, ver que tecnologias se estan utilizando en las tareas
+    def _get_used_technologies(self):
+        for history in self:
+            technologies = None
+            for task in history.tasks:
+                if not technologies:
+                    technologies = task.technologies
+                else:
+                    technologies = technologies + task.technologies
+            history.used_technologies  = technologies     
+            
 
 
+
+#--task--
 class ManageTask(models.Model):
     _name = 'manage.task'
     _description = 'Manage Task'
@@ -38,7 +54,8 @@ class ManageTask(models.Model):
     start_date = fields.Datetime()
     end_date = fields.Datetime()
     is_paused = fields.Boolean()
-    sprint_id = fields.Many2one("manage.sprint", string="Sprint")
+    #sprint_id = fields.Many2one("manage.sprint", string="Sprint")
+    sprint_id = fields.Many2one("manage.sprint", compute="_get_sprint", store=True)
     technologies_ids = fields.Many2many(comodel_name="manage.technology",
                                         relation="technologies_tasks",
                                         column1="task_id",
@@ -56,7 +73,20 @@ class ManageTask(models.Model):
             except Exception as e:
                 raise ValidationError(f"Error al generar el código: {str(e)}")
 
+    @api.depends('code')
+    def _get_sprint(self):
+        for task in self:
+            sprints = self.env['manage.sprint'].search([('project.id' '=', task.history.proyect.id)])  #un sprint por proyecto
+            found = False
+            for sprint in sprints:
+                if isinstance(sprint.end_date, datetime.datetime) and sprint.end_date > datetime.datetime.now():
+                    task.sprint = sprint.id
+                    found = True
+            if not found:
+                task.sprint = False
 
+
+#sprint
 class ManageSprint(models.Model):
     _name = 'manage.sprint'
     _description = 'Manage Sprint'
