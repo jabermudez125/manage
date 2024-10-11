@@ -46,6 +46,8 @@ class ManageTask(models.Model):
     _name = 'manage.task'
     _description = 'Manage Task'
 
+    definition_date = fields.Datetime(default=lambda d: datetime.datetime.now())
+
     project = fields.Many2one('manage.project', related='history.project', readonly=True)
 
     code = fields.Char(compute="_get_code", string="Code")
@@ -88,6 +90,7 @@ class ManageTask(models.Model):
                 task.sprint = False
 
 
+
 #sprint
 class ManageSprint(models.Model):
     _name = 'manage.sprint'
@@ -96,7 +99,7 @@ class ManageSprint(models.Model):
     proyect_ids = fields.Many2one('manage.proyect')
     name = fields.Char()
     description = fields.Text()
-    duration = fields.Integer()
+    duration = fields.Integer(default=15)
     start_date = fields.Datetime()
     end_date = fields.Datetime(compute="_get_end_date", store=True)
     task_ids = fields.One2many("manage.task", "sprint_id", string="Tasks")
