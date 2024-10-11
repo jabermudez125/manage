@@ -41,10 +41,12 @@ class ManageHistory(models.Model):
 
 
 
-#--task--
+#--task----------
 class ManageTask(models.Model):
     _name = 'manage.task'
     _description = 'Manage Task'
+
+    project = fields.Many2one('manage.project', related='history.project', readonly=True)
 
     code = fields.Char(compute="_get_code", string="Code")
 

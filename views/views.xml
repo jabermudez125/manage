@@ -43,6 +43,7 @@
       <field name="arch" type="xml">
         <form>
           <group>
+            <field name="project"/>
             <field name="history_id"/>
             <field name="code"/>
             <field name="name"/>
