@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Este es el primer modelo en Odoo
 
-form odoo import models, fields, api
-form odoo.exceptions import ValidationError
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 import datetime
 
 # --proyect--
