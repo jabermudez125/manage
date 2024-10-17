@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# from odoo import http
+# form odoo import http
 
 
 # class Manage(http.Controller):

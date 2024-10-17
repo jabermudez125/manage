@@ -11,8 +11,8 @@
     </record>
 
     <!-- definición de vista de lista explícita -->
-    <record model="ir.ui.view" id="manage.proyect_from">
-      <field name="name">manage proyect from</field>
+    <record model="ir.ui.view" id="manage.proyect_form">
+      <field name="name">manage proyect form</field>
       <field name="model">manage.proyect</field>
       <field name="arch" type="xml">
         <tree>
@@ -23,7 +23,7 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="manage.history_from">
+    <record model="ir.ui.view" id="manage.history_form">
       <field name="name">manage history form</field>
       <field name="model">manage.history</field>
       <field name="arch" type="xml">
@@ -44,7 +44,7 @@
         <form>
           <group>
             <field name="definition_date"/>
-            <field name="project"/>
+            <field name="proyect"/>
             <field name="history_id"/>
             <field name="code"/>
             <field name="name"/>
