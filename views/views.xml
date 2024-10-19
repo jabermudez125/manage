@@ -44,7 +44,7 @@
         <form>
           <group>
             <field name="definition_date"/>
-            <field name="proyect"/>
+            <field name="proyect_id"/>
             <field name="history_id"/>
             <field name="code"/>
             <field name="name"/>
@@ -65,7 +65,7 @@
       <field name="arch" type="xml">
         <form>
           <group>
-            <field name="proyect_ids"/>
+            <field name="proyect_id"/>
             <field name="name"/>
             <field name="description"/>
             <field name="duration"/>
