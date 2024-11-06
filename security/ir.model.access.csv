@@ -1,6 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_manage_task,manage.task,model_manage_task,base.group_user,1,1,1,1
-access_manage_sprint,manage.sprint,model_manage_sprint,base.group_user,1,1,1,1
-access_manage_technology,manage.technology,model_manage_technology,base.group_user,1,1,1,1
-access_manage_proyect,manage.proyect,model_manage_proyect,base.group_user,1,1,1,1
-access_manage_history,manage.history,model_manage_history,base.group_user,1,1,1,1
+access_manage_proyect,access_manage_proyect,model_manage_proyect,,1,1,1,1
+access_manage_history,access_manage_history,model_manage_history,,1,1,1,1
+access_manage_task,access_manage_task,model_manage_task,,1,1,1,1
+access_manage_sprint,access_manage_sprint,model_manage_sprint,,1,1,1,1
+access_manage_technology,access_manage_technology,model_manage_technology,,1,1,1,1
